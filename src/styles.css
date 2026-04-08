@@ -1,0 +1,295 @@
+/* Global Styles - Harry Potter Theme */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --hp-gold: #c9a84c;
+  --hp-dark: #1a0a00;
+  --hp-maroon: #740001;
+  --hp-cream: #f8f0d8;
+  --hp-blue: #0e1a40;
+  --hp-silver: #aaaaaa;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: var(--hp-dark);
+  color: var(--hp-cream);
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse at top, #2a1505 0%, #1a0a00 50%, #000000 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, var(--hp-maroon) 0%, #3d0000 100%);
+  border-bottom: 3px solid var(--hp-gold);
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: var(--hp-gold);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  letter-spacing: 3px;
+}
+
+header p {
+  color: var(--hp-silver);
+  font-style: italic;
+  margin-top: 5px;
+}
+
+/* Navigation */
+nav {
+  background: rgba(0,0,0,0.4);
+  border-bottom: 1px solid var(--hp-gold);
+  padding: 10px 0;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  gap: 30px;
+}
+
+nav a {
+  color: var(--hp-cream);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.3s;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+nav a:hover, nav a.active {
+  background: var(--hp-gold);
+  color: var(--hp-dark);
+}
+
+/* Cards */
+.card {
+  background: linear-gradient(145deg, #1e0e04 0%, #2a1505 100%);
+  border: 1px solid var(--hp-gold);
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(201, 168, 76, 0.3);
+}
+
+/* Search Box */
+.search-container {
+  padding: 30px 0;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid var(--hp-gold);
+  border-radius: 25px;
+  color: var(--hp-cream);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.search-box input:focus {
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+}
+
+.search-box input::placeholder {
+  color: var(--hp-silver);
+}
+
+.btn {
+  padding: 12px 24px;
+  background: var(--hp-gold);
+  color: var(--hp-dark);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #e8c25a;
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--hp-gold);
+  color: var(--hp-gold);
+}
+
+.btn-outline:hover {
+  background: var(--hp-gold);
+  color: var(--hp-dark);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: var(--hp-gold);
+}
+
+.spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(201,168,76,0.3);
+  border-top-color: var(--hp-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error */
+.error-message {
+  background: rgba(116, 0, 1, 0.3);
+  border: 1px solid var(--hp-maroon);
+  color: #ff6b6b;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.badge-gryffindor { background: #740001; color: #FFC500; }
+.badge-slytherin { background: #1A472A; color: #AAAAAA; }
+.badge-hufflepuff { background: #F0C75E; color: #726255; }
+.badge-ravenclaw { background: #0C1A40; color: #946B2D; }
+.badge-staff { background: #444; color: #ddd; }
+
+/* Details */
+.detail-panel {
+  background: linear-gradient(145deg, #1e0e04, #2a1505);
+  border: 2px solid var(--hp-gold);
+  border-radius: 12px;
+  padding: 30px;
+  margin-top: 20px;
+}
+
+/* Filter Section */
+.filter-section {
+  padding: 20px 0;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-section select {
+  padding: 10px 15px;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid var(--hp-gold);
+  border-radius: 8px;
+  color: var(--hp-cream);
+  cursor: pointer;
+  outline: none;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px 0;
+}
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px 0;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 20px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--hp-gold);
+  border-radius: 8px;
+}
+
+.stat-number {
+  font-size: 2rem;
+  color: var(--hp-gold);
+  font-weight: bold;
+}
+
+.stat-label {
+  color: var(--hp-silver);
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* Spell type colors */
+.spell-charm { border-left: 4px solid #4a90d9; }
+.spell-curse { border-left: 4px solid #c0392b; }
+.spell-jinx { border-left: 4px solid #e67e22; }
+.spell-hex { border-left: 4px solid #8e44ad; }
+.spell-transfiguration { border-left: 4px solid #27ae60; }
+.spell-other { border-left: 4px solid #7f8c8d; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  header h1 { font-size: 1.8rem; }
+  nav ul { gap: 10px; }
+  .grid { grid-template-columns: 1fr; }
+  .filter-section { flex-direction: column; }
+}
