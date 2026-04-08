@@ -59,7 +59,7 @@
           @if (selectedCharacter()!.image) {
             <img [src]="selectedCharacter()!.image" [alt]="selectedCharacter()!.name" />
           } @else {
-            <div class="no-image-large">⚡</div>
+            <div class="no-image-large">&#x26A1;</div>
           }
         </div>
         <div class="character-info">
@@ -120,7 +120,7 @@
         />
       } @empty {
         <div class="no-results">
-          <p>🔮 No characters found matching your search.</p>
+          <p>&#x1F52E; No characters found matching your search.</p>
           <button class="btn btn-outline" (click)="clearSearch()">Clear Search</button>
         </div>
       }
@@ -136,14 +136,12 @@
         >Previous</button>
         
         @for (page of pages; track page) {
-          @if (page <= 5 || page === totalPages() || Math.abs(page - currentPage()) <= 1) {
-            <button 
-              class="btn"
-              [class.active-page]="page === currentPage()"
-              [class.btn-outline]="page !== currentPage()"
-              (click)="changePage(page)"
-            >{{ page }}</button>
-          }
+          <button 
+            class="btn"
+            [class.active-page]="page === currentPage()"
+            [class.btn-outline]="page !== currentPage()"
+            (click)="changePage(page)"
+          >{{ page }}</button>
         }
         
         <button 
@@ -154,4 +152,4 @@
       </div>
     }
   }
-          </div>
+</div>
