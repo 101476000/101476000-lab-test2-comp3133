@@ -1,0 +1,100 @@
+<div class="spells-page">
+  <!-- Stats -->
+  @if (!loading() && !error() && stats().total > 0) {
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number">{{ stats().total }}</div>
+        <div class="stat-label">Total Spells</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">{{ stats().curses }}</div>
+        <div class="stat-label">Curses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">{{ stats().charms }}</div>
+        <div class="stat-label">Charms</div>
+      </div>
+    </div>
+  }
+
+  <!-- Search -->
+  <div class="search-container">
+    <form [formGroup]="searchForm">
+      <div class="search-box">
+        <input
+          type="text"
+          formControlName="searchInput"
+          placeholder="Search spells by name or description..."
+          autocomplete="off"
+        />
+        <button type="button" class="btn" (click)="clearSearch()">Clear</button>
+      </div>
+    </form>
+    @if (totalCount() > 0) {
+      <p style="text-align:center; color: var(--hp-silver); margin-top: 10px;">
+        Showing {{ paginatedSpells().length }} of {{ totalCount() }} spells
+      </p>
+    }
+  </div>
+
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Summoning spells from the grimoire...</p>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (error()) {
+    <div class="error-message">
+      <p>{{ error() }}</p>
+      <button class="btn" (click)="loadSpells()">Try Again</button>
+    </div>
+  }
+
+  <!-- Spells List -->
+  @if (!loading() && !error()) {
+    <div class="spells-list">
+      @for (spell of paginatedSpells(); track spell.id) {
+        <div class="spell-card card" [class]="spell.name | spellTypeClass">
+          <div class="spell-header">
+            <h3 class="spell-name">{{ spell.name }}</h3>
+          </div>
+          <p class="spell-description">{{ spell.description }}</p>
+        </div>
+      } @empty {
+        <div class="no-results">
+          <p>🔮 No spells found matching your search.</p>
+          <button class="btn btn-outline" (click)="clearSearch()">Clear Search</button>
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (totalPages() > 1) {
+      <div class="pagination">
+        <button
+          class="btn btn-outline"
+          [disabled]="currentPage() === 1"
+          (click)="changePage(currentPage() - 1)"
+        >Previous</button>
+
+        @for (page of pages; track page) {
+          <button
+            class="btn"
+            [class.active-page]="page === currentPage()"
+            [class.btn-outline]="page !== currentPage()"
+            (click)="changePage(page)"
+          >{{ page }}</button>
+        }
+
+        <button
+          class="btn btn-outline"
+          [disabled]="currentPage() === totalPages()"
+          (click)="changePage(currentPage() + 1)"
+        >Next</button>
+      </div>
+    }
+  }
+</div>
