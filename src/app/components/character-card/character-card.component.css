@@ -1,0 +1,92 @@
+.character-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.character-card.selected {
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(201,168,76,0.5);
+  transform: translateY(-6px);
+}
+
+.card-image {
+  position: relative;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.card-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(201,168,76,0.3);
+}
+
+.no-image {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: rgba(201,168,76,0.05);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+}
+
+.deceased-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.7);
+  color: #aaa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.card-content {
+  padding: 4px 0;
+}
+
+.character-name {
+  font-size: 1rem;
+  color: var(--hp-cream);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.character-meta {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.meta-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: var(--hp-silver);
+}
+
+.meta-tag.staff {
+  background: rgba(201,168,76,0.2);
+  color: var(--hp-gold);
+}
+
+.meta-tag.wizard {
+  background: rgba(100,100,200,0.2);
+  color: #aab;
+}
+
+.actor-name {
+  font-size: 0.8rem;
+  color: var(--hp-silver);
+  font-style: italic;
+  margin-top: 6px;
+}
