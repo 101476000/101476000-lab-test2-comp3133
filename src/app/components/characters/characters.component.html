@@ -1,0 +1,157 @@
+<div class="characters-page">
+  <!-- Search and Filter Section -->
+  <div class="search-container">
+    <form [formGroup]="searchForm">
+      <div class="search-box">
+        <input 
+          type="text" 
+          formControlName="searchInput"
+          placeholder="Search characters by name, house, or actor..."
+          autocomplete="off"
+        />
+        <button type="button" class="btn" (click)="clearSearch()">Clear</button>
+      </div>
+      
+      <div class="filter-section">
+        <label style="color: var(--hp-gold);">Filter by:</label>
+        <select formControlName="filterSelect">
+          <option value="all">All Characters</option>
+          <option value="student">Hogwarts Students</option>
+          <option value="staff">Hogwarts Staff</option>
+          <option value="wizard">Wizards Only</option>
+          <option value="alive">Alive</option>
+          <option value="gryffindor">Gryffindor</option>
+          <option value="slytherin">Slytherin</option>
+          <option value="hufflepuff">Hufflepuff</option>
+          <option value="ravenclaw">Ravenclaw</option>
+        </select>
+        
+        @if (totalCount() > 0) {
+          <span style="color: var(--hp-silver);">
+            Showing {{ paginatedCharacters().length }} of {{ totalCount() }} characters
+          </span>
+        }
+      </div>
+    </form>
+  </div>
+
+  <!-- Loading State -->
+  @if (loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Summoning characters from the wizarding world...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error()) {
+    <div class="error-message">
+      <p>{{ error() }}</p>
+      <button class="btn" (click)="loadCharacters()">Try Again</button>
+    </div>
+  }
+
+  <!-- Character Detail Panel -->
+  @if (selectedCharacter()) {
+    <div class="detail-panel">
+      <div class="character-detail">
+        <div class="character-image-large">
+          @if (selectedCharacter()!.image) {
+            <img [src]="selectedCharacter()!.image" [alt]="selectedCharacter()!.name" />
+          } @else {
+            <div class="no-image-large">⚡</div>
+          }
+        </div>
+        <div class="character-info">
+          <h2>{{ selectedCharacter()!.name }}</h2>
+          <span [class]="selectedCharacter()!.house | houseBadgeClass">
+            {{ selectedCharacter()!.house | unknownValue:'No House' }}
+          </span>
+          
+          <div class="info-grid">
+            @switch (selectedCharacter()!.species) {
+              @case ('human') {
+                <span class="info-tag">Human</span>
+              }
+              @case ('half-giant') {
+                <span class="info-tag">Half-Giant</span>
+              }
+              @case ('ghost') {
+                <span class="info-tag">Ghost</span>
+              }
+              @default {
+                <span class="info-tag">{{ selectedCharacter()!.species | unknownValue }}</span>
+              }
+            }
+            
+            <p><strong>Gender:</strong> {{ selectedCharacter()!.gender | unknownValue }}</p>
+            <p><strong>Ancestry:</strong> {{ selectedCharacter()!.ancestry | unknownValue }}</p>
+            <p><strong>Eye Colour:</strong> {{ selectedCharacter()!.eyeColour | unknownValue }}</p>
+            <p><strong>Hair Colour:</strong> {{ selectedCharacter()!.hairColour | unknownValue }}</p>
+            <p><strong>Patronus:</strong> {{ selectedCharacter()!.patronus | unknownValue }}</p>
+            <p><strong>Actor:</strong> {{ selectedCharacter()!.actor | unknownValue }}</p>
+            
+            @if (selectedCharacter()!.wand?.wood) {
+              <p><strong>Wand:</strong> {{ selectedCharacter()!.wand.wood }}, {{ selectedCharacter()!.wand.core }}, {{ selectedCharacter()!.wand.length }}"</p>
+            }
+            
+            <p>
+              <strong>Status:</strong> 
+              @if (selectedCharacter()!.alive) {
+                <span style="color: #27ae60;">Alive</span>
+              } @else {
+                <span style="color: #e74c3c;">Deceased</span>
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Characters Grid -->
+  @if (!loading() && !error()) {
+    <div class="grid">
+      @for (character of paginatedCharacters(); track character.id) {
+        <app-character-card 
+          [character]="character"
+          [isSelected]="selectedCharacter()?.id === character.id"
+          (clicked)="selectCharacter($event)"
+        />
+      } @empty {
+        <div class="no-results">
+          <p>🔮 No characters found matching your search.</p>
+          <button class="btn btn-outline" (click)="clearSearch()">Clear Search</button>
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (totalPages() > 1) {
+      <div class="pagination">
+        <button 
+          class="btn btn-outline"
+          [disabled]="currentPage() === 1"
+          (click)="changePage(currentPage() - 1)"
+        >Previous</button>
+        
+        @for (page of pages; track page) {
+          @if (page <= 5 || page === totalPages() || Math.abs(page - currentPage()) <= 1) {
+            <button 
+              class="btn"
+              [class.active-page]="page === currentPage()"
+              [class.btn-outline]="page !== currentPage()"
+              (click)="changePage(page)"
+            >{{ page }}</button>
+          }
+        }
+        
+        <button 
+          class="btn btn-outline"
+          [disabled]="currentPage() === totalPages()"
+          (click)="changePage(currentPage() + 1)"
+        >Next</button>
+      </div>
+    }
+  }
+          </div>
