@@ -1,0 +1,21 @@
+<header>
+  <div class="container">
+    <h1>⚡ Harry Potter Encyclopedia</h1>
+    <p>Explore the magical world of Hogwarts</p>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a routerLink="/characters" routerLinkActive="active">Characters</a></li>
+    <li><a routerLink="/spells" routerLinkActive="active">Spells</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
+
+<footer style="text-align:center; padding: 30px; color: #aaa; border-top: 1px solid #c9a84c; margin-top: 40px;">
+  <p>Harry Potter Encyclopedia &copy; {{ currentYear }} | Data from hp-api.onrender.com</p>
+</footer>
