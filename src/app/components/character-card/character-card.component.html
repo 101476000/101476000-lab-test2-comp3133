@@ -1,0 +1,47 @@
+<div 
+  class="card character-card"
+  [class.selected]="isSelected"
+  (click)="onCardClick()"
+  role="button"
+  [attr.aria-label]="'View details for ' + character.name"
+>
+  <div class="card-image">
+    @if (character.image) {
+      <img [src]="character.image" [alt]="character.name" loading="lazy" />
+    } @else {
+      <div class="no-image">
+        @switch (character.house) {
+          @case ('Gryffindor') { <span>🦁</span> }
+          @case ('Slytherin') { <span>🐍</span> }
+          @case ('Hufflepuff') { <span>🦡</span> }
+          @case ('Ravenclaw') { <span>🦅</span> }
+          @default { <span>⚡</span> }
+        }
+      </div>
+    }
+    @if (!character.alive) {
+      <span class="deceased-badge">✝</span>
+    }
+  </div>
+
+  <div class="card-content">
+    <h3 class="character-name">{{ character.name }}</h3>
+    <span [class]="character.house | houseBadgeClass">
+      {{ character.house | unknownValue:'No House' }}
+    </span>
+    
+    <div class="character-meta">
+      @if (character.hogwartsStudent) {
+        <span class="meta-tag">Student</span>
+      }
+      @if (character.hogwartsStaff) {
+        <span class="meta-tag staff">Staff</span>
+      }
+      @if (character.wizard) {
+        <span class="meta-tag wizard">Wizard</span>
+      }
+    </div>
+
+    <p class="actor-name">{{ character.actor | unknownValue:'Unknown Actor' }}</p>
+  </div>
+</div>
