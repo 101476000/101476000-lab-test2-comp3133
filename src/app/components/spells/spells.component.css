@@ -1,0 +1,49 @@
+.spells-page {
+  padding: 20px 0;
+}
+
+.spells-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.spell-card {
+  padding: 15px 20px;
+  cursor: default;
+}
+
+.spell-card:hover {
+  transform: translateX(5px);
+}
+
+.spell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.spell-name {
+  color: var(--hp-gold);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.spell-description {
+  color: var(--hp-cream);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: var(--hp-silver);
+}
+
+.active-page {
+  background: var(--hp-gold) !important;
+  color: var(--hp-dark) !important;
+}
